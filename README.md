@@ -53,9 +53,7 @@ I am an IT engineering student passionate about building scalable systems, explo
 
 ##  Connect With Me
 
-* LinkedIn: https://linkedin.com/in/YOUR_PROFILE
-* GitHub: https://github.com/YOUR_USERNAME
-* Email: [your-email@example.com](mailto:your-email@example.com)
+* Email: [shlokrathi.29@gmail.com](mailto:shlokrathi.29@gmail.com)
 
 ---
 
