@@ -64,5 +64,3 @@ I am an IT engineering student passionate about building scalable systems, explo
 I enjoy solving complex problems and turning ideas into real-world applications 
 
 ---
-
-⭐ If you like my work, consider giving a star!
