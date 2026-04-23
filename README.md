@@ -1,4 +1,4 @@
-# Shlok Rathi — Portfolio
+# Shlok Rathi - Portfolio
 
 Welcome to my portfolio repository!
 I am an IT engineering student passionate about building scalable systems, exploring AI, and working with modern cloud technologies.
