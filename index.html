@@ -4,9 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shlok Rathi — Portfolio</title>
+<meta name="description" content="Information Technology Undergraduate | Backend Developer & Applied AI Engineer">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
+/* ── FERRARI DESIGN TOKENS ── */
 :root {
   --primary:         #da291c;
   --primary-active:  #b01e0a;
@@ -19,6 +22,7 @@
   --canvas-light:    #ffffff;
   --hairline:        #303030;
   --hairline-light:  #d2d2d2;
+  --success:         #03904a;
 
   --sp-xxxs:4px; --sp-xxs:8px;  --sp-xs:16px;
   --sp-sm:24px;  --sp-md:32px;  --sp-lg:48px;
@@ -31,8 +35,11 @@
 html{scroll-behavior:smooth}
 body{background:var(--canvas);color:var(--ink);font-family:var(--font);font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;background:var(--canvas);border-bottom:1px solid var(--hairline);display:flex;align-items:center;justify-content:space-between;padding:0 var(--sp-lg)}
+/* ── PROGRESS BAR ── */
+#progress-bar{position:fixed;top:0;left:0;height:2px;background:var(--primary);width:0%;z-index:9999;transition:width .1s linear}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;background:rgba(24,24,24,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--hairline);display:flex;align-items:center;justify-content:space-between;padding:0 var(--sp-lg)}
 .nav-mark{display:flex;align-items:center;gap:var(--sp-xs);text-decoration:none}
 .nav-badge{width:32px;height:32px;background:var(--primary);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;letter-spacing:0.5px;flex-shrink:0}
 .nav-wordmark{font-size:13px;font-weight:600;letter-spacing:0.65px;text-transform:uppercase;color:var(--ink)}
@@ -42,16 +49,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;background:var(-
 .nav-cta{background:var(--primary);color:#fff;padding:0 var(--sp-sm);height:40px;font-size:13px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:var(--sp-xxs);transition:background .2s;flex-shrink:0}
 .nav-cta:hover{background:var(--primary-active)}
 
-/* BUTTONS */
+/* ── BUTTONS ── */
 .btn-primary{background:var(--primary);color:#fff;padding:14px 32px;height:48px;font-size:14px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:var(--sp-xxs);transition:background .2s}
 .btn-primary:hover{background:var(--primary-active)}
+.btn-primary:disabled{opacity:.55;cursor:not-allowed}
 .btn-outline{background:transparent;color:var(--ink);padding:13px 31px;height:48px;font-size:14px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;text-decoration:none;border:1px solid rgba(255,255,255,.3);cursor:pointer;display:inline-flex;align-items:center;gap:var(--sp-xxs);transition:border-color .2s,background .2s}
 .btn-outline:hover{border-color:var(--ink);background:rgba(255,255,255,.06)}
-.btn-outline-light{background:transparent;color:var(--body-on-light);padding:13px 31px;height:48px;font-size:14px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;text-decoration:none;border:1px solid var(--body-on-light);cursor:pointer;display:inline-flex;align-items:center;gap:var(--sp-xxs);transition:background .2s}
-.btn-outline-light:hover{background:rgba(24,24,24,.06)}
 .btn-row{display:flex;gap:var(--sp-xs);flex-wrap:wrap}
 
-/* HERO */
+/* ── HERO ── */
 #hero{position:relative;height:100vh;min-height:640px;overflow:hidden}
 .hero-photo{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=1800&q=85');background-size:cover;background-position:center 30%}
 .hero-vignette{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(24,24,24,.25) 0%,rgba(24,24,24,0) 30%,rgba(24,24,24,0) 45%,rgba(24,24,24,.9) 82%,rgba(24,24,24,1) 100%)}
@@ -61,22 +67,21 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;background:var(-
 .hero-h1{font-size:clamp(52px,7vw,80px);font-weight:500;line-height:1.05;letter-spacing:-1.6px;color:var(--ink);margin-bottom:var(--sp-sm)}
 .hero-sub{font-size:14px;font-weight:400;line-height:1.65;color:var(--body);max-width:480px;margin-bottom:var(--sp-lg)}
 
-/* BANDS */
+/* ── BANDS ── */
 .band{padding:var(--sp-xxl) var(--sp-lg)}
 .band-light{padding:var(--sp-xxl) var(--sp-lg);background:var(--canvas-light);color:var(--body-on-light)}
 .band-elevated{padding:var(--sp-xxl) var(--sp-lg);background:var(--canvas-elevated)}
-.band-red{padding:var(--sp-xxl) var(--sp-lg);background:var(--primary)}
 .max-w{max-width:1280px;margin:0 auto}
 
-/* LABELS & HEADINGS */
+/* ── SECTION LABELS & HEADINGS ── */
 .section-label{font-size:11px;font-weight:600;letter-spacing:1.1px;text-transform:uppercase;color:var(--primary);display:flex;align-items:center;gap:var(--sp-xxs);margin-bottom:var(--sp-sm)}
 .section-label::before{content:'';display:block;width:20px;height:1px;background:var(--primary)}
 .section-label-muted{font-size:11px;font-weight:600;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:var(--sp-xxs);margin-bottom:var(--sp-sm)}
 .section-label-muted::before{content:'';display:block;width:20px;height:1px;background:var(--muted)}
-.display-lg{font-size:clamp(28px,3.5vw,36px);font-weight:500;line-height:1.2;letter-spacing:-0.36px;color:var(--ink);margin-bottom:0}
-.display-lg-dark{font-size:clamp(28px,3.5vw,36px);font-weight:500;line-height:1.2;letter-spacing:-0.36px;color:var(--body-on-light);margin-bottom:0}
+.display-lg{font-size:clamp(28px,3.5vw,36px);font-weight:500;line-height:1.2;letter-spacing:-0.36px;color:var(--ink)}
+.display-lg-dark{font-size:clamp(28px,3.5vw,36px);font-weight:500;line-height:1.2;letter-spacing:-0.36px;color:var(--body-on-light)}
 
-/* ABOUT */
+/* ── ABOUT ── */
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-xxl);align-items:start;margin-top:var(--sp-xl)}
 .about-body{font-size:14px;font-weight:400;line-height:1.75;color:var(--body);margin-bottom:var(--sp-md)}
 .spec-row{display:flex;border-top:1px solid var(--hairline);padding-top:var(--sp-lg);gap:var(--sp-xl);margin-top:var(--sp-xl)}
@@ -91,11 +96,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;background:var(-
 .info-val a{color:var(--primary);text-decoration:none}
 .info-val a:hover{text-decoration:underline}
 
-/* LIVERY BAND */
+/* ── LIVERY BAND ── */
 .livery-band{background:var(--primary);padding:var(--sp-xxl) var(--sp-lg);display:flex;align-items:center;justify-content:space-between;gap:var(--sp-lg);flex-wrap:wrap}
 .livery-text{font-size:clamp(24px,3vw,36px);font-weight:500;line-height:1.2;letter-spacing:-0.36px;color:#fff;max-width:560px}
 
-/* PROJECTS */
+/* ── PROJECTS ── */
 .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hairline);margin-top:var(--sp-xl);border:1px solid var(--hairline)}
 .project-card{background:var(--canvas);padding:var(--sp-md);display:flex;flex-direction:column;gap:var(--sp-xs);text-decoration:none;transition:background .2s}
 .project-card:hover{background:var(--canvas-elevated)}
@@ -108,7 +113,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;background:var(-
 .project-arrow{font-size:11px;font-weight:600;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:var(--sp-xxs);transition:color .2s}
 .project-card:hover .project-arrow{color:var(--primary)}
 
-/* SKILLS */
+/* ── SKILLS ── */
 .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hairline-light);margin-top:var(--sp-xl);border:1px solid var(--hairline-light)}
 .skill-group{background:var(--canvas-light);padding:var(--sp-md)}
 .skill-group-label{font-size:11px;font-weight:600;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted);margin-bottom:var(--sp-sm);padding-bottom:var(--sp-sm);border-bottom:1px solid var(--hairline-light)}
@@ -116,8 +121,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;background:var(-
 .skill-item{font-size:14px;font-weight:500;color:var(--body-on-light);padding:var(--sp-xxs) 0;display:flex;align-items:center;gap:var(--sp-xxs)}
 .skill-item::before{content:'';width:6px;height:6px;background:var(--primary);flex-shrink:0}
 
-/* CONTACT */
-.contact-split{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-xxl);margin-top:var(--sp-xl);align-items:start}
+/* ── CONTACT FORM ── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-xxl);margin-top:var(--sp-xl);align-items:start}
 .contact-link-row{display:flex;justify-content:space-between;align-items:center;padding:var(--sp-sm) 0;border-bottom:1px solid var(--hairline);text-decoration:none;color:var(--ink);transition:color .2s}
 .contact-link-row:first-child{border-top:1px solid var(--hairline)}
 .contact-link-type{font-size:11px;font-weight:600;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
@@ -125,10 +130,26 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;background:var(-
 .contact-link-arrow{color:var(--muted);font-size:20px;transition:color .2s}
 .contact-link-row:hover .contact-link-label,.contact-link-row:hover .contact-link-arrow{color:var(--primary)}
 
-/* CTA BAND */
+/* FORM itself */
+.contact-form{display:flex;flex-direction:column;gap:0}
+.form-group{position:relative;border-bottom:1px solid var(--hairline);transition:border-color .25s}
+.form-group:first-child{border-top:1px solid var(--hairline)}
+.form-group:focus-within{border-color:var(--primary)}
+.form-group label{display:block;font-size:11px;font-weight:600;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted);padding:var(--sp-sm) 0 4px;transition:color .2s}
+.form-group:focus-within label{color:var(--primary)}
+.form-group input,
+.form-group textarea{display:block;width:100%;background:transparent;border:none;outline:none;color:var(--ink);font-family:var(--font);font-size:15px;font-weight:400;padding:0 0 var(--sp-sm);resize:none;caret-color:var(--primary);line-height:1.5}
+.form-group input::placeholder,
+.form-group textarea::placeholder{color:var(--muted)}
+.form-actions{display:flex;align-items:center;gap:var(--sp-md);margin-top:var(--sp-lg);flex-wrap:wrap}
+.form-status{font-size:13px;font-weight:600;letter-spacing:0.5px}
+.form-status.success{color:var(--success)}
+.form-status.error{color:#f13a2c}
+
+/* ── CTA BAND ── */
 .cta-band{padding:var(--sp-xxl) var(--sp-lg);text-align:center;border-top:1px solid var(--hairline)}
 
-/* FOOTER */
+/* ── FOOTER ── */
 footer{background:var(--canvas);border-top:1px solid var(--hairline);padding:var(--sp-xl) var(--sp-lg)}
 .footer-inner{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--sp-sm)}
 .footer-copy{font-size:13px;font-weight:400;color:var(--muted)}
@@ -136,24 +157,24 @@ footer{background:var(--canvas);border-top:1px solid var(--hairline);padding:var
 .footer-links a{font-size:13px;font-weight:400;color:var(--muted);text-decoration:none;transition:color .2s}
 .footer-links a:hover{color:var(--ink)}
 
-/* ANIMATIONS */
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
 .reveal.in{opacity:1;transform:translateY(0)}
-.reveal-delay{transition-delay:.15s}
 
-/* RESPONSIVE */
+/* ── RESPONSIVE ── */
 @media(max-width:1024px){
   .about-grid{grid-template-columns:1fr}
   .projects-grid{grid-template-columns:1fr 1fr}
   .skills-grid{grid-template-columns:1fr 1fr}
-  .contact-split{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
 }
 @media(max-width:768px){
   nav{padding:0 var(--sp-xs)}
   .nav-links{display:none}
-  .band,.band-light,.band-elevated,.band-red{padding:var(--sp-xl) var(--sp-xs)}
+  .band,.band-light,.band-elevated{padding:var(--sp-xl) var(--sp-xs)}
   .livery-band,.cta-band{padding:var(--sp-xl) var(--sp-xs)}
   .hero-content{left:var(--sp-xs);right:var(--sp-xs);bottom:var(--sp-xl)}
+  .exp-photo-overlay{padding:var(--sp-xs)}
   .projects-grid{grid-template-columns:1fr}
   .skills-grid{grid-template-columns:1fr}
   .exp-item{grid-template-columns:1fr;gap:var(--sp-xs)}
@@ -164,6 +185,9 @@ footer{background:var(--canvas);border-top:1px solid var(--hairline);padding:var
 </style>
 </head>
 <body>
+
+<!-- Progress Bar -->
+<div id="progress-bar"></div>
 
 <!-- NAV -->
 <nav>
@@ -197,7 +221,7 @@ footer{background:var(--canvas);border-top:1px solid var(--hairline);padding:var
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
       <a href="https://github.com/ShlokRathi29" target="_blank" rel="noopener" class="btn-outline">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
         GitHub
       </a>
       <a href="#contact" class="btn-outline">Contact</a>
@@ -216,7 +240,7 @@ footer{background:var(--canvas);border-top:1px solid var(--hairline);padding:var
           <p class="about-body">I build REST APIs, integrate AI models, and develop scalable backend services using Python. Experienced across databases, asynchronous processing, and cloud-based deployments — interested in real-world system design and AI-driven applications.</p>
           <p class="about-body">Currently pursuing B.E. in Information Technology at Shri Sant Gajanan Maharaj College of Engineering, Buldhana. Open to opportunities where engineering rigour meets real-world impact.</p>
           <div class="btn-row" style="margin-top:var(--sp-sm)">
-            <a href="mailto:shlokrathi.29@gmail.com" class="btn-primary">Get in Touch</a>
+            <a href="#contact" class="btn-primary">Get in Touch</a>
           </div>
           <div class="spec-row">
             <div class="spec-cell">
@@ -260,13 +284,14 @@ footer{background:var(--canvas);border-top:1px solid var(--hairline);padding:var
           </div>
           <div class="info-row">
             <span class="info-key">LinkedIn</span>
-            <span class="info-val"><a href="https://linkedin.com/in/shlok-rathi" target="_blank" rel="noopener">shlok-rathi</a></span>
+            <span class="info-val"><a href="https://www.linkedin.com/in/shlok-rathi-b47160327/" target="_blank" rel="noopener">shlok-rathi</a></span>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
 
 <!-- LIVERY BAND -->
 <div class="livery-band reveal">
@@ -284,7 +309,7 @@ footer{background:var(--canvas);border-top:1px solid var(--hairline);padding:var
       <p class="section-label">Projects</p>
       <h2 class="display-lg">Selected work.</h2>
       <div class="projects-grid">
-        <a href="https://github.com/ShlokRathi29" target="_blank" rel="noopener" class="project-card">
+        <a href="https://github.com/ShlokRathi29/Keyboard_analyser" target="_blank" rel="noopener" class="project-card">
           <p class="project-index">01</p>
           <p class="project-name">Keyboard Analyzer</p>
           <p class="project-desc">Real-time keyboard activity analysis system with background tracking. Packaged as a downloadable Windows .exe and open-sourced on GitHub for extensibility.</p>
@@ -295,26 +320,26 @@ footer{background:var(--canvas);border-top:1px solid var(--hairline);padding:var
           </div>
           <p class="project-arrow">View Project →</p>
         </a>
-        <a href="https://github.com/aadharwadvss/Aadharwad_newspaper" target="_blank" rel="noopener" class="project-card">
-          <p class="project-index">02</p>
-          <p class="project-name">Newspaper Platform</p>
-          <p class="project-desc">Live news platform with article publishing and category filtering. REST APIs for content management, MongoDB schema design, and a responsive React.js frontend.</p>
-          <div class="project-stack">
-            <span class="badge-pill">React.js</span>
-            <span class="badge-pill">Node.js</span>
-            <span class="badge-pill">MongoDB</span>
-          </div>
-          <p class="project-arrow">View Project →</p>
-        </a>
         <a href="https://github.com/ShlokRathi29/Colour-matcher" target="_blank" rel="noopener" class="project-card">
-          <p class="project-index">03</p>
+          <p class="project-index">02</p>
           <p class="project-name">ML Shade Matcher</p>
-          <p class="project-desc">ML model for image-based shade prediction. Full pipeline: preprocessing, feature extraction, training. Streamlit interface for real-time predictions in the browser.</p>
+          <p class="project-desc">ML model for image-based shade prediction. Full pipeline: preprocessing, feature extraction, training, with a Streamlit interface for real-time predictions.</p>
           <div class="project-stack">
             <span class="badge-pill">Python</span>
             <span class="badge-pill">Scikit-learn</span>
             <span class="badge-pill">OpenCV</span>
             <span class="badge-pill">Streamlit</span>
+          </div>
+          <p class="project-arrow">View Project →</p>
+        </a>
+        <a href="https://github.com/aadharwadvss/Aadharwad_newspaper" target="_blank" rel="noopener" class="project-card">
+          <p class="project-index">03</p>
+          <p class="project-name">Newspaper Platform</p>
+          <p class="project-desc">Live news platform with publishing, category filtering, REST APIs for content management, MongoDB schema design, and a responsive React.js frontend.</p>
+          <div class="project-stack">
+            <span class="badge-pill">React.js</span>
+            <span class="badge-pill">Node.js</span>
+            <span class="badge-pill">MongoDB</span>
           </div>
           <p class="project-arrow">View Project →</p>
         </a>
@@ -393,25 +418,15 @@ footer{background:var(--canvas);border-top:1px solid var(--hairline);padding:var
   </div>
 </section>
 
-<!-- CTA BAND -->
-<div class="cta-band reveal">
-  <div class="max-w" style="display:flex;flex-direction:column;align-items:center;gap:var(--sp-lg)">
-    <p class="section-label" style="justify-content:center">Open to Work</p>
-    <h2 style="font-size:clamp(28px,3.5vw,36px);font-weight:500;line-height:1.2;letter-spacing:-0.36px;max-width:560px;text-align:center">Looking for backend or full-stack roles where systems matter.</h2>
-    <div class="btn-row" style="justify-content:center">
-      <a href="mailto:shlokrathi.29@gmail.com" class="btn-primary">Send an Email</a>
-      <a href="https://linkedin.com/in/shlok-rathi" target="_blank" rel="noopener" class="btn-outline">LinkedIn</a>
-    </div>
-  </div>
-</div>
-
 <!-- CONTACT -->
 <section id="contact">
   <div class="band-elevated">
     <div class="max-w reveal">
       <p class="section-label">Contact</p>
       <h2 class="display-lg">Let's connect.</h2>
-      <div class="contact-split">
+      <div class="contact-grid">
+
+        <!-- Contact links left -->
         <div>
           <a href="mailto:shlokrathi.29@gmail.com" class="contact-link-row">
             <div>
@@ -427,7 +442,7 @@ footer{background:var(--canvas);border-top:1px solid var(--hairline);padding:var
             </div>
             <span class="contact-link-arrow">→</span>
           </a>
-          <a href="https://linkedin.com/in/shlok-rathi" target="_blank" rel="noopener" class="contact-link-row">
+          <a href="https://www.linkedin.com/in/shlok-rathi-b47160327/" target="_blank" rel="noopener" class="contact-link-row">
             <div>
               <p class="contact-link-type">LinkedIn</p>
               <p class="contact-link-label">linkedin.com/in/shlok-rathi</p>
@@ -441,24 +456,36 @@ footer{background:var(--canvas);border-top:1px solid var(--hairline);padding:var
             </div>
             <span class="contact-link-arrow">→</span>
           </a>
+
+          <p style="font-size:14px;color:var(--body);line-height:1.75;margin-top:var(--sp-lg)">
+            Available for backend engineering, API development, AI/ML integration, and full-stack projects. Based in Buldhana, Maharashtra — open to remote and relocation.
+          </p>
         </div>
-        <div>
-          <p style="font-size:14px;color:var(--body);line-height:1.75;margin-bottom:var(--sp-lg)">Available for backend engineering, API development, AI/ML integration, and full-stack projects. Based in Buldhana, Maharashtra — open to remote and relocation opportunities.</p>
-          <div class="info-list">
-            <div class="info-row">
-              <span class="info-key">Location</span>
-              <span class="info-val">Buldhana, Maharashtra</span>
-            </div>
-            <div class="info-row">
-              <span class="info-key">Degree</span>
-              <span class="info-val">B.E. Information Technology</span>
-            </div>
-            <div class="info-row">
-              <span class="info-key">College</span>
-              <span class="info-val">SSGMCE, Buldhana</span>
-            </div>
+
+        <!-- Contact form right -->
+        <form id="contact-form" class="contact-form" novalidate>
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="from_name" placeholder="Firstname Lastname" required autocomplete="name">
           </div>
-        </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="from_email" placeholder="hello@example.com" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="message">Your Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Tell me about your project or opportunity..." required></textarea>
+          </div>
+          <div class="form-actions">
+            <button type="submit" id="submit-btn" class="btn-primary">
+              Send Message
+              <svg id="btn-icon-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <svg id="btn-icon-spin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:none;animation:spin .8s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+            </button>
+            <p id="form-status" class="form-status" aria-live="polite"></p>
+          </div>
+        </form>
+
       </div>
     </div>
   </div>
@@ -467,22 +494,80 @@ footer{background:var(--canvas);border-top:1px solid var(--hairline);padding:var
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <p class="footer-copy">© 2025 Shlok Rathi. All rights reserved.</p>
+    <p class="footer-copy">© <span id="year"></span> Shlok Rathi. All rights reserved.</p>
     <div class="footer-links">
       <a href="mailto:shlokrathi.29@gmail.com">Email</a>
       <a href="https://github.com/ShlokRathi29" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://linkedin.com/in/shlok-rathi" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.linkedin.com/in/shlok-rathi-b47160327/" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </div>
 </footer>
 
+<style>
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+</style>
+
 <script>
+/* ── YEAR ── */
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ── EMAILJS INIT ── */
+emailjs.init('CzD-hq0KfEs0_ZsV4');
+
+/* ── PROGRESS BAR ── */
+const progressBar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  progressBar.style.width = pct + '%';
+}, { passive: true });
+
+/* ── SCROLL REVEAL ── */
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
   });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ── CONTACT FORM ── */
+const form       = document.getElementById('contact-form');
+const submitBtn  = document.getElementById('submit-btn');
+const statusEl   = document.getElementById('form-status');
+const iconArrow  = document.getElementById('btn-icon-arrow');
+const iconSpin   = document.getElementById('btn-icon-spin');
+
+function setLoading(on) {
+  submitBtn.disabled = on;
+  iconArrow.style.display = on ? 'none' : '';
+  iconSpin.style.display  = on ? ''     : 'none';
+  submitBtn.childNodes[0].textContent = on ? 'Sending ' : 'Send Message ';
+}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  statusEl.textContent = '';
+  statusEl.className = 'form-status';
+  setLoading(true);
+
+  const params = {
+    from_name:  document.getElementById('name').value.trim(),
+    from_email: document.getElementById('email').value.trim(),
+    message:    document.getElementById('message').value.trim(),
+  };
+
+  try {
+    await emailjs.send('service_0vjozfn', 'template_mvugnsv', params);
+    statusEl.textContent = '✓ Message sent successfully!';
+    statusEl.classList.add('success');
+    form.reset();
+  } catch (err) {
+    console.error('EmailJS error:', err);
+    statusEl.textContent = '✗ Failed to send. Please try again.';
+    statusEl.classList.add('error');
+  } finally {
+    setLoading(false);
+  }
+});
 </script>
 </body>
 </html>
