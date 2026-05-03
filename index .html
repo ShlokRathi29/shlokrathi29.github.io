@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shlok Rathi — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary:         #da291c;
+  --primary-active:  #b01e0a;
+  --ink:             #ffffff;
+  --body:            #969696;
+  --body-on-light:   #181818;
+  --muted:           #666666;
+  --canvas:          #181818;
+  --canvas-elevated: #303030;
+  --canvas-light:    #ffffff;
+  --hairline:        #303030;
+  --hairline-light:  #d2d2d2;
+
+  --sp-xxxs:4px; --sp-xxs:8px;  --sp-xs:16px;
+  --sp-sm:24px;  --sp-md:32px;  --sp-lg:48px;
+  --sp-xl:64px;  --sp-xxl:96px; --sp-super:128px;
+
+  --font: 'Inter', -apple-system, system-ui, sans-serif;
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--canvas);color:var(--ink);font-family:var(--font);font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;background:var(--canvas);border-bottom:1px solid var(--hairline);display:flex;align-items:center;justify-content:space-between;padding:0 var(--sp-lg)}
+.nav-mark{display:flex;align-items:center;gap:var(--sp-xs);text-decoration:none}
+.nav-badge{width:32px;height:32px;background:var(--primary);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;letter-spacing:0.5px;flex-shrink:0}
+.nav-wordmark{font-size:13px;font-weight:600;letter-spacing:0.65px;text-transform:uppercase;color:var(--ink)}
+.nav-links{display:flex;align-items:center;gap:var(--sp-md);list-style:none}
+.nav-links a{font-size:13px;font-weight:600;letter-spacing:0.65px;text-transform:uppercase;color:var(--body);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{background:var(--primary);color:#fff;padding:0 var(--sp-sm);height:40px;font-size:13px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:var(--sp-xxs);transition:background .2s;flex-shrink:0}
+.nav-cta:hover{background:var(--primary-active)}
+
+/* BUTTONS */
+.btn-primary{background:var(--primary);color:#fff;padding:14px 32px;height:48px;font-size:14px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:var(--sp-xxs);transition:background .2s}
+.btn-primary:hover{background:var(--primary-active)}
+.btn-outline{background:transparent;color:var(--ink);padding:13px 31px;height:48px;font-size:14px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;text-decoration:none;border:1px solid rgba(255,255,255,.3);cursor:pointer;display:inline-flex;align-items:center;gap:var(--sp-xxs);transition:border-color .2s,background .2s}
+.btn-outline:hover{border-color:var(--ink);background:rgba(255,255,255,.06)}
+.btn-outline-light{background:transparent;color:var(--body-on-light);padding:13px 31px;height:48px;font-size:14px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;text-decoration:none;border:1px solid var(--body-on-light);cursor:pointer;display:inline-flex;align-items:center;gap:var(--sp-xxs);transition:background .2s}
+.btn-outline-light:hover{background:rgba(24,24,24,.06)}
+.btn-row{display:flex;gap:var(--sp-xs);flex-wrap:wrap}
+
+/* HERO */
+#hero{position:relative;height:100vh;min-height:640px;overflow:hidden}
+.hero-photo{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=1800&q=85');background-size:cover;background-position:center 30%}
+.hero-vignette{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(24,24,24,.25) 0%,rgba(24,24,24,0) 30%,rgba(24,24,24,0) 45%,rgba(24,24,24,.9) 82%,rgba(24,24,24,1) 100%)}
+.hero-content{position:absolute;bottom:var(--sp-xxl);left:var(--sp-lg);max-width:680px;z-index:2}
+.hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:1.1px;text-transform:uppercase;color:var(--primary);margin-bottom:var(--sp-sm);display:flex;align-items:center;gap:var(--sp-xxs)}
+.hero-eyebrow::before{content:'';display:block;width:20px;height:1px;background:var(--primary)}
+.hero-h1{font-size:clamp(52px,7vw,80px);font-weight:500;line-height:1.05;letter-spacing:-1.6px;color:var(--ink);margin-bottom:var(--sp-sm)}
+.hero-sub{font-size:14px;font-weight:400;line-height:1.65;color:var(--body);max-width:480px;margin-bottom:var(--sp-lg)}
+
+/* BANDS */
+.band{padding:var(--sp-xxl) var(--sp-lg)}
+.band-light{padding:var(--sp-xxl) var(--sp-lg);background:var(--canvas-light);color:var(--body-on-light)}
+.band-elevated{padding:var(--sp-xxl) var(--sp-lg);background:var(--canvas-elevated)}
+.band-red{padding:var(--sp-xxl) var(--sp-lg);background:var(--primary)}
+.max-w{max-width:1280px;margin:0 auto}
+
+/* LABELS & HEADINGS */
+.section-label{font-size:11px;font-weight:600;letter-spacing:1.1px;text-transform:uppercase;color:var(--primary);display:flex;align-items:center;gap:var(--sp-xxs);margin-bottom:var(--sp-sm)}
+.section-label::before{content:'';display:block;width:20px;height:1px;background:var(--primary)}
+.section-label-muted{font-size:11px;font-weight:600;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:var(--sp-xxs);margin-bottom:var(--sp-sm)}
+.section-label-muted::before{content:'';display:block;width:20px;height:1px;background:var(--muted)}
+.display-lg{font-size:clamp(28px,3.5vw,36px);font-weight:500;line-height:1.2;letter-spacing:-0.36px;color:var(--ink);margin-bottom:0}
+.display-lg-dark{font-size:clamp(28px,3.5vw,36px);font-weight:500;line-height:1.2;letter-spacing:-0.36px;color:var(--body-on-light);margin-bottom:0}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-xxl);align-items:start;margin-top:var(--sp-xl)}
+.about-body{font-size:14px;font-weight:400;line-height:1.75;color:var(--body);margin-bottom:var(--sp-md)}
+.spec-row{display:flex;border-top:1px solid var(--hairline);padding-top:var(--sp-lg);gap:var(--sp-xl);margin-top:var(--sp-xl)}
+.spec-cell{display:flex;flex-direction:column;gap:4px}
+.spec-number{font-size:56px;font-weight:700;line-height:1.0;letter-spacing:-1.6px;color:var(--ink)}
+.spec-label{font-size:11px;font-weight:600;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted)}
+.info-list{display:flex;flex-direction:column}
+.info-row{display:flex;justify-content:space-between;align-items:baseline;padding:var(--sp-sm) 0;border-bottom:1px solid var(--hairline);gap:var(--sp-md)}
+.info-row:first-child{border-top:1px solid var(--hairline)}
+.info-key{font-size:11px;font-weight:600;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted);flex-shrink:0}
+.info-val{font-size:14px;font-weight:400;color:var(--ink);text-align:right}
+.info-val a{color:var(--primary);text-decoration:none}
+.info-val a:hover{text-decoration:underline}
+
+/* LIVERY BAND */
+.livery-band{background:var(--primary);padding:var(--sp-xxl) var(--sp-lg);display:flex;align-items:center;justify-content:space-between;gap:var(--sp-lg);flex-wrap:wrap}
+.livery-text{font-size:clamp(24px,3vw,36px);font-weight:500;line-height:1.2;letter-spacing:-0.36px;color:#fff;max-width:560px}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hairline);margin-top:var(--sp-xl);border:1px solid var(--hairline)}
+.project-card{background:var(--canvas);padding:var(--sp-md);display:flex;flex-direction:column;gap:var(--sp-xs);text-decoration:none;transition:background .2s}
+.project-card:hover{background:var(--canvas-elevated)}
+.project-index{font-size:11px;font-weight:600;letter-spacing:1.1px;text-transform:uppercase;color:var(--primary)}
+.project-name{font-size:18px;font-weight:700;color:var(--ink);line-height:1.2}
+.project-desc{font-size:14px;font-weight:400;color:var(--body);line-height:1.6;flex:1}
+.project-stack{display:flex;flex-wrap:wrap;gap:var(--sp-xxs);padding-top:var(--sp-xs);border-top:1px solid var(--hairline)}
+.badge-pill{background:var(--canvas-elevated);color:var(--ink);font-size:11px;font-weight:600;letter-spacing:1.1px;text-transform:uppercase;border-radius:9999px;padding:4px 12px}
+.project-card:hover .badge-pill{background:#3f3f3f}
+.project-arrow{font-size:11px;font-weight:600;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:var(--sp-xxs);transition:color .2s}
+.project-card:hover .project-arrow{color:var(--primary)}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hairline-light);margin-top:var(--sp-xl);border:1px solid var(--hairline-light)}
+.skill-group{background:var(--canvas-light);padding:var(--sp-md)}
+.skill-group-label{font-size:11px;font-weight:600;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted);margin-bottom:var(--sp-sm);padding-bottom:var(--sp-sm);border-bottom:1px solid var(--hairline-light)}
+.skill-items{display:flex;flex-direction:column;gap:var(--sp-xxs)}
+.skill-item{font-size:14px;font-weight:500;color:var(--body-on-light);padding:var(--sp-xxs) 0;display:flex;align-items:center;gap:var(--sp-xxs)}
+.skill-item::before{content:'';width:6px;height:6px;background:var(--primary);flex-shrink:0}
+
+/* CONTACT */
+.contact-split{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-xxl);margin-top:var(--sp-xl);align-items:start}
+.contact-link-row{display:flex;justify-content:space-between;align-items:center;padding:var(--sp-sm) 0;border-bottom:1px solid var(--hairline);text-decoration:none;color:var(--ink);transition:color .2s}
+.contact-link-row:first-child{border-top:1px solid var(--hairline)}
+.contact-link-type{font-size:11px;font-weight:600;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.contact-link-label{font-size:16px;font-weight:500;color:var(--ink);transition:color .2s}
+.contact-link-arrow{color:var(--muted);font-size:20px;transition:color .2s}
+.contact-link-row:hover .contact-link-label,.contact-link-row:hover .contact-link-arrow{color:var(--primary)}
+
+/* CTA BAND */
+.cta-band{padding:var(--sp-xxl) var(--sp-lg);text-align:center;border-top:1px solid var(--hairline)}
+
+/* FOOTER */
+footer{background:var(--canvas);border-top:1px solid var(--hairline);padding:var(--sp-xl) var(--sp-lg)}
+.footer-inner{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--sp-sm)}
+.footer-copy{font-size:13px;font-weight:400;color:var(--muted)}
+.footer-links{display:flex;gap:var(--sp-lg)}
+.footer-links a{font-size:13px;font-weight:400;color:var(--muted);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--ink)}
+
+/* ANIMATIONS */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal-delay{transition-delay:.15s}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .about-grid{grid-template-columns:1fr}
+  .projects-grid{grid-template-columns:1fr 1fr}
+  .skills-grid{grid-template-columns:1fr 1fr}
+  .contact-split{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  nav{padding:0 var(--sp-xs)}
+  .nav-links{display:none}
+  .band,.band-light,.band-elevated,.band-red{padding:var(--sp-xl) var(--sp-xs)}
+  .livery-band,.cta-band{padding:var(--sp-xl) var(--sp-xs)}
+  .hero-content{left:var(--sp-xs);right:var(--sp-xs);bottom:var(--sp-xl)}
+  .projects-grid{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:1fr}
+  .exp-item{grid-template-columns:1fr;gap:var(--sp-xs)}
+  .spec-row{gap:var(--sp-md)}
+  footer{padding:var(--sp-md) var(--sp-xs)}
+  .footer-inner{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-mark">
+    <div class="nav-badge">SR</div>
+    <span class="nav-wordmark">Shlok Rathi</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://github.com/ShlokRathi29" target="_blank" rel="noopener" class="nav-cta">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+    GitHub
+  </a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-photo"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-content reveal">
+    <p class="hero-eyebrow">Information Technology Undergraduate</p>
+    <h1 class="hero-h1">Shlok<br>Rathi.</h1>
+    <p class="hero-sub">Backend developer and applied AI systems engineer. Building scalable APIs, LLM integrations, and full-stack applications from Maharashtra, India.</p>
+    <div class="btn-row">
+      <a href="#projects" class="btn-primary">
+        View Projects
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="https://github.com/ShlokRathi29" target="_blank" rel="noopener" class="btn-outline">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="#contact" class="btn-outline">Contact</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="band">
+    <div class="max-w reveal">
+      <p class="section-label">About</p>
+      <h2 class="display-lg">IT undergraduate focused on<br>backend systems and applied AI.</h2>
+      <div class="about-grid">
+        <div>
+          <p class="about-body">I build REST APIs, integrate AI models, and develop scalable backend services using Python. Experienced across databases, asynchronous processing, and cloud-based deployments — interested in real-world system design and AI-driven applications.</p>
+          <p class="about-body">Currently pursuing B.E. in Information Technology at Shri Sant Gajanan Maharaj College of Engineering, Buldhana. Open to opportunities where engineering rigour meets real-world impact.</p>
+          <div class="btn-row" style="margin-top:var(--sp-sm)">
+            <a href="mailto:shlokrathi.29@gmail.com" class="btn-primary">Get in Touch</a>
+          </div>
+          <div class="spec-row">
+            <div class="spec-cell">
+              <span class="spec-number">2+</span>
+              <span class="spec-label">Internships</span>
+            </div>
+            <div class="spec-cell">
+              <span class="spec-number">5+</span>
+              <span class="spec-label">Projects</span>
+            </div>
+            <div class="spec-cell">
+              <span class="spec-number" style="font-size:36px;letter-spacing:-0.5px">2023</span>
+              <span class="spec-label">Enrolled</span>
+            </div>
+          </div>
+        </div>
+        <div class="info-list">
+          <div class="info-row">
+            <span class="info-key">Status</span>
+            <span class="info-val" style="color:#03904a;font-weight:600">Open to Opportunities</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Degree</span>
+            <span class="info-val">B.E. Information Technology</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Location</span>
+            <span class="info-val">Buldhana, Maharashtra</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Email</span>
+            <span class="info-val"><a href="mailto:shlokrathi.29@gmail.com">shlokrathi.29@gmail.com</a></span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Phone</span>
+            <span class="info-val"><a href="tel:+918329142606">+91 83291 42606</a></span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">GitHub</span>
+            <span class="info-val"><a href="https://github.com/ShlokRathi29" target="_blank" rel="noopener">ShlokRathi29</a></span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">LinkedIn</span>
+            <span class="info-val"><a href="https://linkedin.com/in/shlok-rathi" target="_blank" rel="noopener">shlok-rathi</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVERY BAND -->
+<div class="livery-band reveal">
+  <p class="livery-text">Building systems that run — not just code that compiles.</p>
+  <a href="https://github.com/ShlokRathi29" target="_blank" rel="noopener" class="btn-outline" style="flex-shrink:0;border-color:rgba(255,255,255,.5)">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+    View GitHub
+  </a>
+</div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="band">
+    <div class="max-w reveal">
+      <p class="section-label">Projects</p>
+      <h2 class="display-lg">Selected work.</h2>
+      <div class="projects-grid">
+        <a href="https://github.com/ShlokRathi29" target="_blank" rel="noopener" class="project-card">
+          <p class="project-index">01</p>
+          <p class="project-name">Keyboard Analyzer</p>
+          <p class="project-desc">Real-time keyboard activity analysis system with background tracking. Packaged as a downloadable Windows .exe and open-sourced on GitHub for extensibility.</p>
+          <div class="project-stack">
+            <span class="badge-pill">Python</span>
+            <span class="badge-pill">Electron.js</span>
+            <span class="badge-pill">Node.js</span>
+          </div>
+          <p class="project-arrow">View Project →</p>
+        </a>
+        <a href="https://github.com/aadharwadvss/Aadharwad_newspaper" target="_blank" rel="noopener" class="project-card">
+          <p class="project-index">02</p>
+          <p class="project-name">Newspaper Platform</p>
+          <p class="project-desc">Live news platform with article publishing and category filtering. REST APIs for content management, MongoDB schema design, and a responsive React.js frontend.</p>
+          <div class="project-stack">
+            <span class="badge-pill">React.js</span>
+            <span class="badge-pill">Node.js</span>
+            <span class="badge-pill">MongoDB</span>
+          </div>
+          <p class="project-arrow">View Project →</p>
+        </a>
+        <a href="https://github.com/ShlokRathi29/Colour-matcher" target="_blank" rel="noopener" class="project-card">
+          <p class="project-index">03</p>
+          <p class="project-name">ML Shade Matcher</p>
+          <p class="project-desc">ML model for image-based shade prediction. Full pipeline: preprocessing, feature extraction, training. Streamlit interface for real-time predictions in the browser.</p>
+          <div class="project-stack">
+            <span class="badge-pill">Python</span>
+            <span class="badge-pill">Scikit-learn</span>
+            <span class="badge-pill">OpenCV</span>
+            <span class="badge-pill">Streamlit</span>
+          </div>
+          <p class="project-arrow">View Project →</p>
+        </a>
+      </div>
+      <div style="margin-top:var(--sp-lg);display:flex;justify-content:flex-end">
+        <a href="https://github.com/ShlokRathi29" target="_blank" rel="noopener" class="btn-outline">All Repositories →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS (light band) -->
+<section id="skills">
+  <div class="band-light">
+    <div class="max-w reveal">
+      <p class="section-label-muted">Skills</p>
+      <h2 class="display-lg-dark">Technical proficiencies.</h2>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <p class="skill-group-label">Languages</p>
+          <div class="skill-items">
+            <span class="skill-item">Python</span>
+            <span class="skill-item">JavaScript</span>
+            <span class="skill-item">Java</span>
+            <span class="skill-item">C</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <p class="skill-group-label">Backend</p>
+          <div class="skill-items">
+            <span class="skill-item">REST APIs</span>
+            <span class="skill-item">FastAPI</span>
+            <span class="skill-item">Node.js</span>
+            <span class="skill-item">Express.js</span>
+            <span class="skill-item">MVC Architecture</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <p class="skill-group-label">AI / ML</p>
+          <div class="skill-items">
+            <span class="skill-item">LLM APIs</span>
+            <span class="skill-item">Prompt Engineering</span>
+            <span class="skill-item">Data Pipelines</span>
+            <span class="skill-item">Scikit-learn</span>
+            <span class="skill-item">OpenCV</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <p class="skill-group-label">Frontend</p>
+          <div class="skill-items">
+            <span class="skill-item">React.js</span>
+            <span class="skill-item">HTML / CSS</span>
+            <span class="skill-item">Streamlit</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <p class="skill-group-label">Databases</p>
+          <div class="skill-items">
+            <span class="skill-item">MongoDB</span>
+            <span class="skill-item">MySQL</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <p class="skill-group-label">Tools &amp; Concepts</p>
+          <div class="skill-items">
+            <span class="skill-item">Git / GitHub</span>
+            <span class="skill-item">Docker</span>
+            <span class="skill-item">Postman</span>
+            <span class="skill-item">Data Structures</span>
+            <span class="skill-item">OOP</span>
+            <span class="skill-item">Async Processing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band reveal">
+  <div class="max-w" style="display:flex;flex-direction:column;align-items:center;gap:var(--sp-lg)">
+    <p class="section-label" style="justify-content:center">Open to Work</p>
+    <h2 style="font-size:clamp(28px,3.5vw,36px);font-weight:500;line-height:1.2;letter-spacing:-0.36px;max-width:560px;text-align:center">Looking for backend or full-stack roles where systems matter.</h2>
+    <div class="btn-row" style="justify-content:center">
+      <a href="mailto:shlokrathi.29@gmail.com" class="btn-primary">Send an Email</a>
+      <a href="https://linkedin.com/in/shlok-rathi" target="_blank" rel="noopener" class="btn-outline">LinkedIn</a>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="band-elevated">
+    <div class="max-w reveal">
+      <p class="section-label">Contact</p>
+      <h2 class="display-lg">Let's connect.</h2>
+      <div class="contact-split">
+        <div>
+          <a href="mailto:shlokrathi.29@gmail.com" class="contact-link-row">
+            <div>
+              <p class="contact-link-type">Email</p>
+              <p class="contact-link-label">shlokrathi.29@gmail.com</p>
+            </div>
+            <span class="contact-link-arrow">→</span>
+          </a>
+          <a href="https://github.com/ShlokRathi29" target="_blank" rel="noopener" class="contact-link-row">
+            <div>
+              <p class="contact-link-type">GitHub</p>
+              <p class="contact-link-label">github.com/ShlokRathi29</p>
+            </div>
+            <span class="contact-link-arrow">→</span>
+          </a>
+          <a href="https://linkedin.com/in/shlok-rathi" target="_blank" rel="noopener" class="contact-link-row">
+            <div>
+              <p class="contact-link-type">LinkedIn</p>
+              <p class="contact-link-label">linkedin.com/in/shlok-rathi</p>
+            </div>
+            <span class="contact-link-arrow">→</span>
+          </a>
+          <a href="tel:+918329142606" class="contact-link-row">
+            <div>
+              <p class="contact-link-type">Phone</p>
+              <p class="contact-link-label">+91 83291 42606</p>
+            </div>
+            <span class="contact-link-arrow">→</span>
+          </a>
+        </div>
+        <div>
+          <p style="font-size:14px;color:var(--body);line-height:1.75;margin-bottom:var(--sp-lg)">Available for backend engineering, API development, AI/ML integration, and full-stack projects. Based in Buldhana, Maharashtra — open to remote and relocation opportunities.</p>
+          <div class="info-list">
+            <div class="info-row">
+              <span class="info-key">Location</span>
+              <span class="info-val">Buldhana, Maharashtra</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">Degree</span>
+              <span class="info-val">B.E. Information Technology</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">College</span>
+              <span class="info-val">SSGMCE, Buldhana</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <p class="footer-copy">© 2025 Shlok Rathi. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="mailto:shlokrathi.29@gmail.com">Email</a>
+      <a href="https://github.com/ShlokRathi29" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/shlok-rathi" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
